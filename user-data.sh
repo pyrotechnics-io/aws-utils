@@ -2,6 +2,7 @@
 
 # Change 'admin' to 'ec2-user' for RHEL/CentOS/AmazonLinux 
 RUNAS="sudo -u admin"
+ASSETS="https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com"
 
 # Make bigger swap
 sudo fallocate -l 4G /swapfile
@@ -24,8 +25,11 @@ echo 'source "$HOME/.cargo/env"' >> /home/admin/.bashrc
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
 cd /tmp && unzip awscliv2.zip && sudo ./aws/install && cd
 
-# Vim Plugins
+# Vim and Tmux Plugins
+$RUNAS curl $ASSETS/vimrc -o ~/.vimrc
+$RUNAS curl $ASSETS/tmux.conf -o ~/.tmux.conf
 $RUNAS git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+$RUNAS vim +PluginInstall +qall
 
 # Terraform
 wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
