@@ -25,7 +25,7 @@ echo 'source "$HOME/.cargo/env"' >> /home/admin/.bashrc
 $RUNAS curl https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com/vimrc -o ~/.vimrc
 $RUNAS curl https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com/tmux.conf -o ~/.tmux.conf
 $RUNAS git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-$RUNAS vim +PluginInstall +qall
+$RUNAS vim -E -s +PluginInstall +qall
 
 # Terraform
 wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
