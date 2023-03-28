@@ -2,7 +2,6 @@
 
 # Change 'admin' to 'ec2-user' for RHEL/CentOS/AmazonLinux 
 RUNAS="sudo -u admin"
-ASSETS="https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com"
 ARCH=$(uname -m)
 
 # Make bigger swap
@@ -23,8 +22,8 @@ $RUNAS /usr/bin/curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | $RUN
 echo 'source "$HOME/.cargo/env"' >> /home/admin/.bashrc
 
 # Vim and Tmux Plugins
-$RUNAS curl $ASSETS/vimrc -o ~/.vimrc
-$RUNAS curl $ASSETS/tmux.conf -o ~/.tmux.conf
+$RUNAS curl https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com/vimrc -o ~/.vimrc
+$RUNAS curl https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com/tmux.conf -o ~/.tmux.conf
 $RUNAS git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 $RUNAS vim +PluginInstall +qall
 
