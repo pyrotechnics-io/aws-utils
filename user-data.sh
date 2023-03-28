@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Change 'admin' to 'ec2-user' for RHEL/CentOS/AmazonLinux 
-RUNAS="sudo -u admin"
+USER="admin"
+RUNAS="sudo -u $USER"
 ARCH=$(uname -m)
 
 # Make bigger swap
@@ -22,9 +23,9 @@ $RUNAS /usr/bin/curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | $RUN
 echo 'source "$HOME/.cargo/env"' >> /home/admin/.bashrc
 
 # Vim and Tmux Plugins
-$RUNAS curl https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com/vimrc -o ~/.vimrc
-$RUNAS curl https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com/tmux.conf -o ~/.tmux.conf
-$RUNAS git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+$RUNAS wget -O- https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com/vimrc > /home/$USER/.vimrc
+$RUNAS wget -O- https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com/tmux.conf > /home/$USER/.tmux.conf
+$RUNAS git clone https://github.com/VundleVim/Vundle.vim.git /home/$USER/.vim/bundle/Vundle.vim
 $RUNAS vim -E -s +PluginInstall +qall
 
 # Terraform
