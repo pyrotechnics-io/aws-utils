@@ -16,7 +16,7 @@ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 sudo apt update && sudo apt install -y curl htop wget vim-nox python3 python3-pip tmux git jq unzip gnupg software-properties-common
 
 # Python plugins
-$RUNAS /usr/bin/python3 -m pip install yapf cookiecutter
+$RUNAS /usr/bin/python3 -m pip install yapf cookiecutter jinja2_strcase
 
 # Rust
 $RUNAS /usr/bin/curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | $RUNAS sh -s -- -y --no-modify-path
