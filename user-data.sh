@@ -3,6 +3,7 @@
 # Change 'admin' to 'ec2-user' for RHEL/CentOS/AmazonLinux 
 RUNAS="sudo -u admin"
 ASSETS="https://hbaste-public-read.s3.ap-southeast-1.amazonaws.com"
+ARCH=$(uname -m)
 
 # Make bigger swap
 sudo fallocate -l 4G /swapfile
@@ -21,10 +22,6 @@ $RUNAS /usr/bin/python3 -m pip install yapf cookiecutter
 $RUNAS /usr/bin/curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | $RUNAS sh -s -- -y --no-modify-path
 echo 'source "$HOME/.cargo/env"' >> /home/admin/.bashrc
 
-# AWS Cli
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
-cd /tmp && unzip awscliv2.zip && sudo ./aws/install && cd
-
 # Vim and Tmux Plugins
 $RUNAS curl $ASSETS/vimrc -o ~/.vimrc
 $RUNAS curl $ASSETS/tmux.conf -o ~/.tmux.conf
@@ -39,6 +36,9 @@ sudo apt update && sudo apt-get install -y terraform
 # New Relic
 curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash
 
+# AWS Cli
+curl "https://awscli.amazonaws.com/awscli-exe-linux-$ARCH.zip" -o "/tmp/awscliv2.zip"
+cd /tmp && unzip awscliv2.zip && sudo ./aws/install && cd
+
 # Oh-my-bash
-export OSH_THEME="powerline"
 $RUNAS bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
