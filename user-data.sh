@@ -40,5 +40,5 @@ sudo apt update && sudo apt-get install -y terraform
 curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash
 
 # Oh-my-bash
-export OSH_THEME="powerline"'
+export OSH_THEME="powerline"
 $RUNAS bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
